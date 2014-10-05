@@ -1,0 +1,9 @@
+startup_message off 
+
+hardstatus alwayslastline "%{b kw}%H %{r}%1` %{w}| %{g}%c %{w}| %{y}%Y-%m-%d %{w}| %{g}%l %{w}| %{-b kw}%u %-Lw%{= rW}%50> %n%f %t %{-}%+Lw%<"
+
+screen -t 01 0
+
+screen -t 02 1
+
+termcapinfo xterm* ti@:te@
