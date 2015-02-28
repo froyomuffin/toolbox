@@ -13,6 +13,8 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'kien/ctrlp.vim'
 Plugin 'octol/vim-cpp-enhanced-highlight'
+Plugin 'valloric/youcompleteme'
+Plugin 'taglist.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -31,9 +33,18 @@ filetype plugin indent on    " required
 
 " NERD Tree
 autocmd BufEnter * lcd %:p:h
-map <C-x> :NERDTreeToggle<CR>
 map <C-x><C-x> :NERDTreeFind<CR>
-let g:NERDTreeWinSize=40
+let g:NERDTreeWinSize = 40
+
+" Taglist
+let Tlist_Use_Right_Window = 1
+let Tlist_WinWidth = 40
+
+" NERD Tree & Taglist
+map <C-x> :NERDTreeToggle <bar> TlistToggle<CR>
+
+" CScope
+map <C-\> :cs find 3 <cword>
 
 " CPP
 let g:cpp_class_scope_highlight = 1
@@ -46,3 +57,5 @@ set number
 set incsearch
 set scrolloff=4
 set tags=./tags
+set hlsearch
+filetype plugin on
