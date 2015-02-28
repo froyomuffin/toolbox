@@ -1,0 +1,6 @@
+#!/bin/bash
+
+ctags -R .
+
+find $PWD -name '*.cpp' -o -name '*.c' -o -name '*.h' > cscope.files
+cscope -bvq
