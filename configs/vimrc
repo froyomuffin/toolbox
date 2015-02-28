@@ -34,20 +34,24 @@ filetype plugin indent on    " required
 " NERD Tree
 autocmd BufEnter * lcd %:p:h
 map <C-x><C-x> :NERDTreeFind<CR>
-let g:NERDTreeWinSize = 40
+let g:NERDTreeWinSize=30
 
 " Taglist
-let Tlist_Use_Right_Window = 1
-let Tlist_WinWidth = 40
+let Tlist_Use_Right_Window=1
+let Tlist_WinWidth=30
 
 " NERD Tree & Taglist
 map <C-x> :NERDTreeToggle <bar> TlistToggle<CR>
 
 " CScope
-map <C-\> :cs find 3 <cword>
+map <C-\> :cs find 3 <cword><CR>
+cs add cscope.out
+
+" CTags
+set tags=./tags,tags;$HOME
 
 " CPP
-let g:cpp_class_scope_highlight = 1
+let g:cpp_class_scope_highlight=1
 map <C-n> :e %<.cpp><CR>
 map <C-n><C-n> :e %<.h><CR>
 
@@ -56,6 +60,8 @@ syntax on
 set number
 set incsearch
 set scrolloff=4
-set tags=./tags
 set hlsearch
-filetype plugin on
+set tabstop=4
+set shiftwidth=4
+set expandtab
+filetype plugin indent on
