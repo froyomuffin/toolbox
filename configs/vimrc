@@ -15,6 +15,7 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'valloric/youcompleteme'
 Plugin 'taglist.vim'
+Plugin 'rust-lang/rust.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -52,8 +53,8 @@ set tags=./tags,tags;$HOME
 
 " CPP
 let g:cpp_class_scope_highlight=1
-map <C-n> :e %<.cpp><CR>
-map <C-n><C-n> :e %<.h><CR>
+map <C-n><C-n> :e %<.cpp><CR>
+map <C-n> :e %<.h><CR>
 
 " General VIM
 syntax on
