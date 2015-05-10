@@ -16,6 +16,7 @@ Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'valloric/youcompleteme'
 Plugin 'taglist.vim'
 Plugin 'rust-lang/rust.vim'
+Plugin 'JazzCore/ctrlp-cmatcher'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -50,6 +51,16 @@ cs add cscope.out
 
 " CTags
 set tags=./tags,tags;$HOME
+
+" CTRL-P
+let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
+      \ --ignore .git
+      \ --ignore .svn
+      \ --ignore .hg
+      \ --ignore .DS_Store
+      \ --ignore "**/*.pyc"
+      \ -g ""'
+let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
 
 " CPP
 let g:cpp_class_scope_highlight=1
