@@ -1,0 +1,13 @@
+#!/bin/sh
+
+TARGET=$1
+echo "Starting to monitor '$TARGET'"
+while true
+do
+    inotifywait \
+        -r \
+        --exclude '(\..*\.swp|\..*\.swx|GTAGS|GPATH|GRTAGS)' \
+        -e modify,attrib,close_write,move,create,delete \
+        $TARGET && \
+        gtag-index $TARGET
+done &

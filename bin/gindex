@@ -1,0 +1,15 @@
+#!/bin/sh
+
+TARGET=$1
+cd $TARGET
+if [[ -f GTAGS ]] && [[ -f GPATH ]] && [[ -f GRTAGS ]]
+then
+    echo "Updating tags"
+    global -u
+else
+    echo "Building new tags"
+    rm GTAGS GPATH GRTAGS 2> /dev/null
+    gtags
+fi  
+cd - > /dev/null
+
