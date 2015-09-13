@@ -1,7 +1,11 @@
 #!/bin/sh
 
 TARGET=$1
-cd $TARGET
+if [[ ! -z "$TARGET" ]]
+then
+    cd $TARGET
+fi
+
 if [[ -f GTAGS ]] && [[ -f GPATH ]] && [[ -f GRTAGS ]]
 then
     echo "Updating tags"
@@ -11,5 +15,3 @@ else
     rm GTAGS GPATH GRTAGS 2> /dev/null
     gtags
 fi  
-cd - > /dev/null
-
