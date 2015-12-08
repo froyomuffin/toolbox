@@ -1,0 +1,6 @@
+#!/bin/bash
+
+FILENAME=/tmp/$(date +%F_%H%M%S_%N).png
+
+convert <(xwd) $FILENAME
+
