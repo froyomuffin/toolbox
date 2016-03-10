@@ -1,0 +1,17 @@
+#!/bin/bash
+
+BROWSER='firefox'
+SEARCHBASEURL='http://google.com?gws_rd=ssl#q='
+REDIR='> /dev/null 2>&1'
+
+if [[ ! -z ${*} ]]
+then
+    QUERY=$(echo ${*} | sed 's/ /+/g')
+
+    CMD=nohup" "${BROWSER}" "${SEARCHBASEURL}${QUERY}
+
+    ${CMD} > /dev/null 2>&1 &
+else
+    echo "Enter a search query..."
+fi
+
