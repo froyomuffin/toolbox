@@ -1,0 +1,25 @@
+#!/bin/bash
+
+DMENU_PATH=$(dmenu_path)
+DMENU_OUT=$(echo "${DMENU_PATH}" | dmenu "${@}")
+CHOSEN_CMD=$(echo $DMENU_OUT | awk '{ print $1 }')
+FALLBACK_CMD="search"
+
+# Validate the output of dmenu. If the command is available in dmenu_path, the output is valid
+for AVAILABLE_CMD in ${DMENU_PATH}
+do
+    if [[ ${AVAILABLE_CMD} == ${CHOSEN_CMD} ]]
+    then
+        FULLCOMMAND=${DMENU_OUT}
+        break
+    fi
+done
+
+# Otherwise, prepend a default command (could be a processor or error handler etc).
+if [[ -z ${FULLCOMMAND} ]]
+then
+    FULLCOMMAND="${FALLBACK_CMD} ${DMENU_OUT}"
+fi
+
+# Execute the patched command!
+echo ${FULLCOMMAND} | ${SHELL:-"/bin/sh"} &
