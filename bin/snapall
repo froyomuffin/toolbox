@@ -1,0 +1,7 @@
+#!/bin/bash
+
+SCREENSHOTDIR='~/'
+FILENAME=$SCREENSHOTDIR/$(date +%F_%H%M%S_%N).png
+
+convert <(xwd -root) $FILENAME
+
