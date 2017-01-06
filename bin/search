@@ -4,9 +4,9 @@ BROWSER='firefox'
 SEARCHBASEURL='http://google.com?gws_rd=ssl#q='
 REDIR='> /dev/null 2>&1'
 
-if [[ ! -z ${*} ]]
+if [[ ! -z "${*}" ]]
 then
-    QUERY=$(echo ${*} | sed 's/ /+/g')
+    QUERY=$(echo "${*}" | sed 's/ /+/g')
 
     CMD=nohup" "${BROWSER}" "${SEARCHBASEURL}${QUERY}
 
