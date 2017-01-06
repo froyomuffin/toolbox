@@ -1,0 +1,87 @@
+#!/bin/bash
+
+function inputs {
+    pacmd list-sink-inputs \
+        | grep 'index:' \
+        | awk '{ print $NF}'
+}
+
+function starred-sinks {
+    pacmd list-sinks \
+        | grep 'index:' \
+        | sed 's/index://g' \
+        | sed 's/ //g'
+}
+
+function sinks {
+    starred-sinks \
+        | sed 's/*//g'
+}
+
+function last-sink {
+    sinks \
+        | tail -1
+}
+
+function first-sink {
+    sinks \
+        | head -1
+}
+
+function current-sink {
+    starred-sinks \
+        | grep '*' \
+        | sed 's/*//g'
+}
+
+function next-sink {
+    starred-sinks \
+        | grep -A1 '*' \
+        | grep -v '*'
+}
+
+function cycle-sink {
+    if [[ $(current-sink) -eq $(last-sink) ]]
+    then
+        # First one on the list
+        echo $(first-sink)
+    else
+        # Next one on the list
+        echo $(next-sink)
+    fi
+}
+
+function set-default-sink {
+    pacmd set-default-sink $1
+}
+
+function migrate-to-sink {
+    pacmd move-sink-input $1 $2
+}
+
+function notification {
+    pactl load-module module-sine frequency=500
+    sleep 0.1s
+    pactl unload-module module-sine
+}
+
+function cycle-audio {
+    new_sink=$(cycle-sink)
+
+    echo "Setting default sink to \"$new_sink\""
+    set-default-sink $new_sink
+
+    echo "Migrating inputs"
+    inputs=$(inputs)
+    for input in $inputs
+    do
+        echo "Migrating input \"$input\" to sink \"$new_sink\""
+        migrate-to-sink $input $new_sink
+    done
+
+    echo "Making sound"
+    sleep 0.5s
+    notification
+}
+
+cycle-audio
