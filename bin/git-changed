@@ -1,0 +1,9 @@
+#!/bin/bash
+
+CMD="$*"
+
+[ -z "$CMD" ] && CMD='master'
+
+echo Checking against "$CMD"
+echo "=============================="
+git diff --name-only 'HEAD' "$CMD"

@@ -1,0 +1,6 @@
+#!/bin/bash
+
+git reset HEAD~500
+git checkout -- .
+git clean -fd
+git pull
